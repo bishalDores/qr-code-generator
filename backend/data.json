@@ -1,0 +1,10 @@
+{
+  "companyName": "SoftwindTech Limited",
+  "companyWebsite": "https://www.softwindtech.com/",
+  "companyAddress": "House: 73, Road-13/A, Block: D, Banani, Dhaka-1213, Bangladesh",
+  "description": "Softwind Tech is offering Website design,Web development, and Digital marketing services for your business needs.",
+  "socialLinks": [
+    { "name": "facebook", "link": "facebook.com" },
+    { "name": "linkedIn", "link": "linkedIn.com" }
+  ]
+}

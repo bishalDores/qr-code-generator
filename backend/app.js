@@ -24,8 +24,10 @@ app.use(cookieParser());
 app.use(cors());
 
 const auth = require("./routes/auth");
+const user = require("./routes/user");
 
 app.use("/api/v1", auth);
+app.use("/api/v1", user);
 
 // handling unhandled routes
 app.all("*", (req, res, next) => {
