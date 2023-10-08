@@ -42,3 +42,26 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   // Create JSON web token
   sendToken(user, 200, res);
 });
+
+// social login => /api/v1/socialLogin
+exports.socialLogin = catchAsyncErrors(async (req, res, next) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email }).select("+password");
+
+  if (user) {
+    // Create JSON web token
+    sendToken(user, 200, res);
+  } else {
+    // here user does not exists
+    const generateRandomPassword = Math.random().toString(36).slice(-12); // this is needed for social login as user does not provide password
+    const generateRandomPhoneNumber = "+8801016000000";
+    const newUser = await User.create({
+      name: req.body.name,
+      email,
+      password: generateRandomPassword,
+      phone: generateRandomPhoneNumber,
+    });
+    // Create JWT Token
+    sendToken(newUser, 200, res);
+  }
+});
