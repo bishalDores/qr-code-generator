@@ -10,6 +10,16 @@
       @content;
     }
   }
+  @if $size == Mdevice {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+  @if $size == Ldevice {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
 }
 .nav_wrapper {
   height: 64px;
@@ -33,6 +43,18 @@ a {
   }
   svg {
     color: #575757;
+  }
+}
+.landing_page_wrapper {
+  height: calc(100vh - 64px);
+  background-color: #efefef;
+  .inner {
+    width: 100%;
+    padding: 30px;
+    margin: 0 auto;
+    @include responsive-size(Mdevice) {
+      max-width: 1400px;
+    }
   }
 }
 .login_wrapper {
