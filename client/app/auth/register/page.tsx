@@ -1,25 +1,26 @@
-"use client";
 import NavLayout from "@/components/NavLayout";
 import React from "react";
 import { Input, Button } from "@mantine/core";
 import Link from "next/link";
 import { IconBrandGoogle } from "@tabler/icons-react";
 
-const Login = () => {
+const Register = () => {
   return (
     <>
-      <title>Login</title>
+      <title>Create Account</title>
       <NavLayout>
         <div className="login_wrapper">
           <div className="login_inner">
-            <h3>Login</h3>
-            <p>Please enter your email and password:</p>
+            <h3>Register</h3>
+            <p>Please fill in the information below:</p>
 
             <form>
-              <Input placeholder="Email" radius={0} type="email" />
+              <Input placeholder="Name" radius={0} type="text" />
+              <Input placeholder="Email" radius={0} type="email" mt={"md"} />
               <Input placeholder="Password" mt={"md"} radius={0} mb={"md"} type="password" />
+              <Input placeholder="Phone" radius={0} mb={"md"} type="text" />
               <Button fullWidth radius={0} style={{ textTransform: "uppercase" }}>
-                login
+                create my account
               </Button>
               <Button
                 fullWidth
@@ -32,9 +33,6 @@ const Login = () => {
                 Continue with google
               </Button>
             </form>
-            <p className="small_text">
-              Don't have an account ? <Link href="/auth/register">Create one</Link>
-            </p>
           </div>
         </div>
       </NavLayout>
@@ -42,4 +40,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
