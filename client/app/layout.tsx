@@ -1,9 +1,9 @@
-import "@mantine/core/styles.css";
-import "./globals.css";
 import type { Metadata } from "next";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Raleway } from "next/font/google";
 import { theme } from "../theme";
+import "@mantine/core/styles.css";
+import "./globals.scss";
 
 const raleway = Raleway({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
@@ -15,7 +15,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <ColorSchemeScript />
+      <head>
+        <ColorSchemeScript />
+      </head>
+
       <body className={raleway.className}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>

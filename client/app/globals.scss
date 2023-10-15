@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+@mixin responsive-size($size) {
+  @if $size == Tabdevice {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+}
+.nav_wrapper {
+  height: 64px;
+  background-color: white;
+  padding: 0 30px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  .nav_inner {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    .right_menu {
+      line-height: 0px;
+    }
+  }
+}
+a {
+  &:active {
+    color: #7b2eda;
+  }
+  svg {
+    color: #7b2eda;
+  }
+}
+.login_wrapper {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
+  .login_inner {
+    width: 100%;
+    @include responsive-size(Tabdevice) {
+      max-width: 400px;
+      min-width: 400px;
+    }
+    h3 {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+    p {
+      text-align: center;
+      letter-spacing: 1px;
+      margin: 15px 0;
+    }
+  }
+}
+.small_text {
+  font-size: 14px;
+}

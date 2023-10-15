@@ -1,11 +1,11 @@
-import { Button } from "@mantine/core";
+import NavLayout from "@/components/NavLayout";
 
 export default function Home() {
   return (
     <main>
-      <h2>This is heading</h2>
-      <p>Paragraph</p>
-      <Button variant="filled">Button</Button>
+      <NavLayout>
+        <p>main page</p>
+      </NavLayout>
     </main>
   );
 }
