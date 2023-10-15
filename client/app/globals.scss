@@ -47,13 +47,27 @@ a {
 }
 .landing_page_wrapper {
   height: calc(100vh - 64px);
-  background-color: #efefef;
+  background: url("/images/hangout.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   .inner {
-    width: 100%;
-    padding: 30px;
-    margin: 0 auto;
-    @include responsive-size(Mdevice) {
-      max-width: 1400px;
+    width: 850px;
+    height: auto;
+    padding: 25px;
+    background-color: rgba(123, 46, 218, 0.8);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 4px;
+    p {
+      color: white;
+      font-size: 18px;
+      text-align: justify;
     }
   }
 }
