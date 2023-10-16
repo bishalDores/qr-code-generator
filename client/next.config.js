@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  env: {
+    GOOGLE_CLIENT_ID: "429886614856-bq5kvc5ra9gs5p9t7h354ehutup1789q.apps.googleusercontent.com",
+    GOOGLE_CLIENT_SECRET: "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",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
