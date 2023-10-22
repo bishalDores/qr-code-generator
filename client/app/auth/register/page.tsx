@@ -1,10 +1,41 @@
+"use client";
+
 import NavLayout from "@/components/NavLayout";
-import React from "react";
+import React, { useState } from "react";
 import { Input, Button } from "@mantine/core";
-import Link from "next/link";
 import { IconBrandGoogle } from "@tabler/icons-react";
+import { postRequest } from "@/utils/httpHandlers";
+import { variables } from "@/utils/apiUrls";
+import useGoogleAuth from "@/utils/useGoogleAuth";
 
 const Register = () => {
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
+  const [authenticate, token] = useGoogleAuth();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await postRequest(variables.register, formState);
+    if (res.success) {
+      // do something for success
+    } else {
+      // do something for error
+    }
+  };
+
+  const { email, password, name, phone } = formState;
+
   return (
     <>
       <title>Create Account</title>
@@ -14,12 +45,12 @@ const Register = () => {
             <h3>Register</h3>
             <p>Please fill in the information below:</p>
 
-            <form>
-              <Input placeholder="Name" radius={0} type="text" />
-              <Input placeholder="Email" radius={0} type="email" mt={"md"} />
-              <Input placeholder="Password" mt={"md"} radius={0} mb={"md"} type="password" />
-              <Input placeholder="Phone" radius={0} mb={"md"} type="text" />
-              <Button fullWidth radius={0} style={{ textTransform: "uppercase" }}>
+            <form onSubmit={handleSubmit}>
+              <Input placeholder="Name" radius={0} type="text" name="name" value={name} onChange={handleChange} />
+              <Input placeholder="Email" radius={0} type="email" mt={"md"} name="email" value={email} onChange={handleChange} />
+              <Input placeholder="Password" mt={"md"} radius={0} mb={"md"} type="password" name="password" value={password} onChange={handleChange} />
+              <Input placeholder="Phone" radius={0} mb={"md"} type="text" name="phone" value={phone} onChange={handleChange} />
+              <Button fullWidth radius={0} style={{ textTransform: "uppercase" }} type="submit">
                 create my account
               </Button>
               <Button
@@ -29,6 +60,8 @@ const Register = () => {
                 mt={"md"}
                 variant="light"
                 leftSection={<IconBrandGoogle size={14} />}
+                type="button"
+                onClick={() => authenticate()}
               >
                 Continue with google
               </Button>

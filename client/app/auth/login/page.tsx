@@ -4,13 +4,18 @@ import React, { useState } from "react";
 import { Input, Button } from "@mantine/core";
 import Link from "next/link";
 import { IconBrandGoogle } from "@tabler/icons-react";
-import { useGoogleLogin } from "@react-oauth/google";
+
+import { postRequest } from "@/utils/httpHandlers";
+import { variables } from "@/utils/apiUrls";
+import useGoogleAuth from "@/utils/useGoogleAuth";
 
 const Login = () => {
   const [formState, setFormState] = useState({
     email: "",
     password: "",
   });
+  const [authenticate, token] = useGoogleAuth();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
       ...formState,
@@ -18,17 +23,18 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formState);
+    const res = await postRequest(variables.login, formState);
+    if (res.success) {
+      // do something for success
+    } else {
+      // do something for error
+    }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
-    onError: (error) => console.log("Login Failed:", error),
-  });
-
   const { email, password } = formState;
+
   return (
     <>
       <title>Login</title>
@@ -40,16 +46,7 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
               <Input placeholder="Email" radius={0} type="email" name="email" onChange={handleChange} value={email} />
-              <Input
-                placeholder="Password"
-                mt={"md"}
-                radius={0}
-                mb={"md"}
-                type="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-              />
+              <Input placeholder="Password" mt={"md"} radius={0} mb={"md"} type="password" name="password" value={password} onChange={handleChange} />
               <Button fullWidth radius={0} style={{ textTransform: "uppercase" }} type="submit">
                 login
               </Button>
@@ -61,13 +58,13 @@ const Login = () => {
                 variant="light"
                 leftSection={<IconBrandGoogle size={14} />}
                 type="button"
-                onClick={() => login()}
+                onClick={() => authenticate()}
               >
                 Continue with google
               </Button>
             </form>
             <p className="small_text">
-              Don't have an account ? <Link href="/auth/register">Create one</Link>
+              Don&apos;t have an account ? <Link href="/auth/register">Create one</Link>
             </p>
           </div>
         </div>
