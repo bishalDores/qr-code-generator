@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000", "http://127.0.0.1:3000"] }));
 
 const auth = require("./routes/auth");
 const user = require("./routes/user");

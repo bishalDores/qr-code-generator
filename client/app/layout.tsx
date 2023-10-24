@@ -3,6 +3,7 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Raleway } from "next/font/google";
 import { theme } from "../theme";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
 import "@mantine/core/styles.css";
 import "./globals.scss";
 import BaseChildrenWrapper from "@/components/BaseChildrenWrapper";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NextTopLoader color="#7b2eda" />
         <MantineProvider theme={theme}>
           <BaseChildrenWrapper children={children} />
+          <Toaster closeButton richColors />
         </MantineProvider>
       </body>
     </html>

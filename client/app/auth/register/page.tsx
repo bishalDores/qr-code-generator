@@ -7,14 +7,17 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { postRequest } from "@/utils/httpHandlers";
 import { variables } from "@/utils/apiUrls";
 import useGoogleAuth from "@/utils/useGoogleAuth";
+import { toast } from "sonner";
 
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+  phone: "",
+};
 const Register = () => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-  });
+  const [formState, setFormState] = useState(initialState);
+
   const [authenticate, token] = useGoogleAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,9 +31,12 @@ const Register = () => {
     e.preventDefault();
     const res = await postRequest(variables.register, formState);
     if (res.success) {
-      // do something for success
+      toast.success("Success", { description: "Your registration was successful" });
+      setFormState(initialState);
     } else {
-      // do something for error
+      toast.error("Error", {
+        description: res.message,
+      });
     }
   };
 
